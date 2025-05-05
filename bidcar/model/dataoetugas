@@ -1,0 +1,41 @@
+<?php
+$no = 1;
+$query = mysqli_query($conn, "SELECT * FROM tb_petugas");
+while ($data = mysqli_fetch_assoc($query)) {
+  echo "<tr>
+    <td>$no</td>
+    <td>{$data['nama_petugas']}</td>
+    <td>{$data['username']}</td>
+    <td>{$data['password']}</td>
+    <td><span class='badge " . ($data['level'] == 'admin' ? 'admin' : 'petugas') . "'>" . ucfirst($data['level']) . "</span></td>
+    <td><button class='btn-delete'><i class='fas fa-trash'></i></button></td>
+  </tr>";
+  $no++;
+}
+?>
+
+<button class='btn-delete'><i class='fas fa-trash'></i></button>
+<td><span class='badge " . ($data['level'] == 'admin' ? 'admin' : 'petugas') . "'>" . ucfirst($data['level']) . "</span></td>
+
+<td>
+  <span class='badge <?= $data['level'] == "admin" ? "admin" : "petugas" ?>'>
+    <?= ucfirst($data['level']) ?>
+  </span>
+</td>
+.badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 13px;
+  display: inline-block;
+}
+
+.badge.admin {
+  background-color: #fff9c4;  /* kuning muda */
+  color: #f57f17;             /* oranye tua */
+}
+
+.badge.petugas {
+  background-color: #d1c4e9;  /* ungu muda */
+  color: #512da8;             /* ungu tua */
+}
+
